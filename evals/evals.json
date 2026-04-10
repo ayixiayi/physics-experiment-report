@@ -50,6 +50,22 @@
         {"id": "a3-uncertainty-discussion", "text": "Error/uncertainty analysis discusses at least one specific error source (e.g., self-heating, cold junction compensation, instrument resolution, thermal lag)"},
         {"id": "a3-chinese-structure", "text": "Report in Chinese with sections including 实验目的, 实验原理, and 数据处理. Input data (109.8Ω at 25°C, 136.5Ω at 95°C) appears in a data table"}
       ]
+    },
+    {
+      "id": 4,
+      "prompt": "帮我写落球法测液体粘滞系数的实验报告。实验用小钢球在蓖麻油中自由下落，测量下落时间来计算粘滞系数η。原始数据如下：\n\n钢球直径d（螺旋测微器，零点读数-0.010mm）：三次测量分别为1.968mm, 1.970mm, 1.965mm\n量筒内径D：61.26mm, 61.36mm, 61.26mm\n下落距离s：184.3mm, 184.1mm, 184.5mm\n下落时间t（秒表计时，10次）：14.72, 14.90, 14.16, 14.09, 14.62, 13.97, 14.47, 14.56, 14.41, 14.16\n蓖麻油密度ρ_l = 0.9612 g/mL\n50颗钢球总质量 = 1.638g（即每颗钢球m = 0.032760g）\n实验温度18°C\n当地重力加速度g = 9.7940 m/s²\n\n需要完整的数据处理过程、η的计算（注意壁面修正）、不确定度传递、Python画图代码，以及思考题解答（如何验证小球已达到终端速度、密度计为什么刻度不均匀等）。",
+      "expected_output": "Complete report with: Stokes law with Ladenburg wall correction factor D/(D+2.4d), micrometer zero correction applied to d, η calculation ~1.0-1.2 Pa·s, full uncertainty propagation with partial derivatives, Python plots, terminal velocity discussion, Chinese report format.",
+      "files": [],
+      "assertions": [
+        {"id": "a4-wall-correction", "text": "The viscosity formula includes the Ladenburg wall correction factor. Specifically, the factor D/(D+2.4d) or equivalent (1+2.4d/D)⁻¹ must appear in the η calculation — not just raw Stokes law η = (ρ_s - ρ_l)gd²/(18v)"},
+        {"id": "a4-zero-correction", "text": "Micrometer zero correction is applied to ball diameter. The zero reading is -0.010mm, so the corrected readings should be 1.978, 1.980, 1.975mm (each raw reading minus the zero error -0.010, i.e., adding 0.010). The mean d used in calculations must be around 1.977-1.978mm, NOT 1.967-1.968mm"},
+        {"id": "a4-eta-value", "text": "Calculated viscosity η is between 0.9 and 1.3 Pa·s (or equivalently kg/(m·s)). The expected value for castor oil at 18°C is approximately 1.1 Pa·s. Values outside 0.9-1.3 indicate a formula or unit error"},
+        {"id": "a4-uncertainty-propagation", "text": "Uncertainty/error propagation is performed with partial derivatives for at least 3 of the 5 measured quantities (d, D, s, t, m). The relative uncertainty Ur or absolute uncertainty Δη is computed and stated numerically"},
+        {"id": "a4-er-in-report", "text": "Relative error Er (or equivalent comparison metric) appears in the report text with a specific numeric percentage. This can be Er vs a reference value, or Ur as the combined relative uncertainty"},
+        {"id": "a4-terminal-velocity", "text": "Terminal velocity verification is discussed: either as a 思考题 answer or in the discussion section. Must explain a method to verify the ball has reached terminal velocity (e.g., measuring fall times over different segments and checking they are equal, or theoretical settling distance estimation)"},
+        {"id": "a4-chinese-structure", "text": "Report is in Chinese with standard physics lab sections: at minimum 实验目的, 实验原理, 数据处理. Input data (fall times, diameter readings) appears in formatted tables"},
+        {"id": "a4-plots-exist", "text": "Python plotting code is provided that generates at least 1 figure (e.g., fall time distribution histogram, or data visualization). Code includes savefig or equivalent to produce PNG output"}
+      ]
     }
   ]
 }
