@@ -47,3 +47,10 @@ Tested across 3 experiments × 26 assertions.
 ## License
 
 MIT
+
+## 作者的话
+1. 闹剧结束了
+2. 我认为如果数据没问题的话，五个ai大于五个大学生
+3. 当太阳升起，就把数据忘掉
+4. 我依然是世一skill
+5. 认真对待整场实验，最后却因误差输掉
