@@ -1,0 +1,55 @@
+{
+  "skill_name": "physics-experiment-report",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "我做了转动惯量实验，需要写实验报告。实验测了三轴法验证平行轴定理和正交轴定理。我有圆盘和圆环的质量、半径数据，还有各配置下的运动周期数据（k值对应时间t）。圆盘质量481.7g，外径R=110.05mm，圆环M=698.7g，外径R1=52.55mm，内径R2=49.95mm。k-t数据：圆盘 k=[2,4,6,8,10,12,14,16,18,20], t=[1.432,2.012,2.541,3.038,3.538,4.001,4.450,4.921,5.377,5.877]。请帮我完成完整的数据处理、拟合、画图代码和报告文字。",
+      "expected_output": "Complete report with: theoretical inertia calculations, linear fit of k-t data (or T²-d² linearization), angular acceleration extraction, experimental vs theoretical comparison with relative errors, Python plotting code for fit curves, formatted data tables, error analysis discussing photogate systematic errors, and discussion questions about parallel/perpendicular axis theorems.",
+      "files": [],
+      "assertions": [
+        {"id": "a1-section-structure", "text": "Report contains all of: 实验目的, 实验原理, 数据记录与处理, 误差分析 or 总结 — each with substantive content (not just headers)"},
+        {"id": "a1-theoretical-inertia-accuracy", "text": "Theoretical disc moment of inertia I_disc uses I=1/2·M·r² with r as RADIUS (not diameter). The computed value must be between 6.5×10⁻⁴ and 8.0×10⁻⁴ kg·m² (correct range for M=0.4817kg, r≈0.055m)"},
+        {"id": "a1-linear-fit", "text": "k-t data is fit with a linear model (degree 1 polyfit, linregress, or equivalent T²-vs-d² linearization). Fit slope/coefficients and R² or correlation coefficient are reported"},
+        {"id": "a1-er-in-report-text", "text": "Relative error Er = |experimental - theoretical| / theoretical × 100% appears in report.md text (not just in Python code) with a specific numeric percentage value"},
+        {"id": "a1-input-data-present", "text": "The report's data table includes the actual input k-t pairs: T=1.432s at k=2 and T=5.877s at k=20 appear in the report or CSV"},
+        {"id": "a1-plots-generated", "text": "At least 2 PNG figure files exist in outputs: one showing scatter+fit overlay for k-t or T²-d² data, and one additional figure (residuals, comparison bar chart, or data table image)"},
+        {"id": "a1-chinese-with-units", "text": "Report text is in Chinese. Axis labels in Python plots include physical units (e.g., s, kg·m², cm)"},
+        {"id": "a1-application-or-discussion", "text": "Report includes either 应用延伸/实验拓展 section OR answers ≥2 discussion questions (思考题) with physics reasoning beyond one-sentence answers"}
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "波尔共振实验报告，需要处理以下数据：自由振动周期测量T0平均=1.603s，阻尼振动振幅序列θ=[152,140,130,121,112,104,96,89,83,77]（每隔一个周期记录），受迫振动数据（驱动周期T和稳态振幅A的关系）：T=[1.10,1.20,1.30,1.40,1.50,1.55,1.58,1.60,1.62,1.65,1.70,1.80,1.90,2.00], A=[5,8,13,22,48,75,110,145,120,80,45,20,12,8]度。帮我做完整数据处理：固有频率计算、阻尼系数β的lnθ-t线性拟合、幅频特性曲线绘制、共振频率确定、理论曲线与实验对比，以及思考题解答。",
+      "expected_output": "Complete report with: ω₀ from T0, damping β from ln(θ) vs t fit, amplitude-frequency curve, resonance comparison, Python plots, discussion questions.",
+      "files": [],
+      "assertions": [
+        {"id": "a2-omega0-value", "text": "ω₀ = 2π/T₀ calculated from T₀=1.603s. The numeric value must be between 3.8 and 4.0 rad/s"},
+        {"id": "a2-damping-fit-with-equation", "text": "ln(θ) vs t linear fit performed. The fit equation (ln θ = -βt + c or equivalent) AND the numeric β value AND R² are all explicitly stated in the report text"},
+        {"id": "a2-beta-accuracy", "text": "Damping coefficient β value is between 0.020 and 0.030 s⁻¹. The damping data θ=[152,140,...,77] recorded every T₀=1.603s means t=[0,1.603,3.206,...,14.427]. Fitting ln(θ) vs t with these times gives slope ≈ -0.047, but since amplitudes are recorded every period (not every half-period), β = |slope| ≈ 0.047 is wrong if Δt was miscalculated. With correct Δt=T₀=1.603s for 10 points spanning t=0 to 14.427s, the slope is about -0.047, so β≈0.047. Accept range 0.020-0.060 s⁻¹ to allow both conventions"},
+        {"id": "a2-amplitude-freq-peak", "text": "Amplitude-frequency curve plotted. The resonance peak is identified near T≈1.58-1.62s (or ω≈3.88-3.97 rad/s). The maximum amplitude (~145°) is visible in the plot"},
+        {"id": "a2-theory-vs-experiment", "text": "Theoretical resonance frequency (from ω₀ and β) is compared with experimental resonance frequency. A relative error or discrepancy value is stated"},
+        {"id": "a2-phase-frequency", "text": "Phase-frequency (相频特性) relationship is discussed or plotted. OR the report explains why phase data was not available from the given measurements"},
+        {"id": "a2-damping-envelope-or-decay", "text": "A plot showing the damping decay (θ vs t with exponential envelope, or ln θ vs t with linear fit line) exists as a PNG file in outputs"},
+        {"id": "a2-error-analysis", "text": "Error analysis section discusses at least one specific systematic error source (e.g., reading angle precision, driving frequency stability, transient vs steady state)"},
+        {"id": "a2-chinese-report", "text": "Report text is in Chinese with proper section structure (实验目的, 实验原理, 数据处理 etc.)"}
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "帮我写温度传感器实验报告。我用了铂电阻（Pt100）和热电偶（K型）两种传感器测量温度，从室温加热到100°C再冷却。铂电阻数据：温度[25,35,45,55,65,75,85,95]°C，电阻[109.8,113.6,117.5,121.3,125.1,128.9,132.7,136.5]Ω。热电偶数据：温度[25,35,45,55,65,75,85,95]°C，电动势[0.00,0.40,0.81,1.22,1.64,2.06,2.49,2.92]mV。需要线性拟合、灵敏度比较、非线性误差分析，以及两种传感器的优缺点对比。",
+      "expected_output": "Complete report with: dual linear fits, sensitivity calculations, R² values, comparison table, Python plots, error analysis.",
+      "files": [],
+      "assertions": [
+        {"id": "a3-dual-fit-with-equations", "text": "Both Pt100 and thermocouple data are linearly fitted. The fit equations (R = aT + b and EMF = cT + d) with numeric coefficients appear in report text"},
+        {"id": "a3-sensitivity-accuracy", "text": "Sensitivity values are calculated: Pt100 slope must be between 0.35 and 0.42 Ω/°C, thermocouple slope must be between 0.038 and 0.045 mV/°C"},
+        {"id": "a3-intercept-values", "text": "The fit intercepts are stated: Pt100 intercept should be between 99 and 111 Ω (R at T=0°C), thermocouple intercept should be between -1.1 and 0.1 mV. These are sanity checks on fitting correctness"},
+        {"id": "a3-r-squared-both", "text": "R² or correlation coefficient is reported for BOTH fits (not just one)"},
+        {"id": "a3-nonlinear-error", "text": "Non-linearity error or residual analysis is performed — either max deviation from linear fit, or residual plot, or non-linearity percentage"},
+        {"id": "a3-comparison-table", "text": "A comparison table or section explicitly contrasts Pt100 vs thermocouple on ≥3 dimensions (e.g., sensitivity, range, accuracy, response time, cost)"},
+        {"id": "a3-plots-exist", "text": "Python plotting code generates scatter+fit plots for both sensors. At least 1 PNG file exists in outputs, OR plots.py contains savefig calls for both sensors"},
+        {"id": "a3-uncertainty-discussion", "text": "Error/uncertainty analysis discusses at least one specific error source (e.g., self-heating, cold junction compensation, instrument resolution, thermal lag)"},
+        {"id": "a3-chinese-structure", "text": "Report in Chinese with sections including 实验目的, 实验原理, and 数据处理. Input data (109.8Ω at 25°C, 136.5Ω at 95°C) appears in a data table"}
+      ]
+    }
+  ]
+}
