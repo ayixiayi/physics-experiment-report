@@ -254,6 +254,52 @@ This experiment involves free, damped, and forced oscillations. Three distinct a
 - Sensitivity = slope of the linear fit. Compare Pt100 sensitivity (~0.385 Ω/°C) vs. thermocouple (~0.042 mV/°C).
 - Discuss non-linearity by examining residuals or max deviation from the fit.
 
+### 落球法 (Falling Ball Viscometry)
+
+- **Ladenburg wall correction** is mandatory: η_corrected = η_raw × [D/(D+2.4d)] or equivalent (1+2.4d/D)⁻¹. Without this correction, the result is systematically high.
+- **Micrometer zero correction**: if zero reading is −0.010mm, add 0.010mm to each reading (corrected = raw − zero_error). This is a common trap.
+- Steel ball density: calculate from total mass of N balls and diameter, ρ_s = m/(πd³/6). Typical: ~7800 kg/m³.
+- Expected η for castor oil at 18°C: ~1.0–1.2 Pa·s. If outside 0.8–1.5, check unit conversions (mm→m, g→kg).
+- Terminal velocity verification: discuss measuring fall times over multiple equal segments — if times are equal, terminal velocity is reached.
+
+### 集成霍尔传感器 (Integrated Hall Sensor)
+
+This experiment typically has 2-3 sub-experiments:
+
+1. **Sensitivity K measurement**: Fix supply voltage Is, vary solenoid current Im. Theoretical B = μ₀NI_m/L (infinite solenoid approximation). Plot U vs B and fit linearly — slope = K in V/T. Compare with nominal spec (SS495A: 31.25±1.25 V/T).
+
+2. **B(x) axial field distribution**: Fix Im, move sensor along the solenoid axis. Convert Hall voltage ΔU = U − U₀ to B using K. Plot B vs x — expect a plateau in the center and symmetric falloff at the ends. Compare with finite solenoid Biot-Savart integral: B(x) = (μ₀NI/2L)[cosθ₁ + cosθ₂] where θ₁, θ₂ are angles from point x to each end.
+
+3. **Key formulas**: μ₀ = 4π×10⁻⁷ T·m/A. For N=3000, L=260mm: B(center) ≈ μ₀NI/L. The Hall voltage offset U₀ (at B=0) must be subtracted: ΔU = U − U₀, then B = ΔU/K.
+
+### 光学测角仪 (Optical Goniometer / Spectrometer)
+
+This experiment measures prism apex angle α using a spectrometer. Two methods:
+
+1. **Reflection method (反射法)**: α = ½[(θ₁ − θ₁') + (θ₂ − θ₂')]. Use the two-vernier average to eliminate eccentric error. All arithmetic in degrees and arcminutes — convert carefully: 1° = 60'.
+
+2. **Autocollimation method (自准法)**: α = 180° − ½[(θ₁ − θ₁') + (θ₂ − θ₂')]. Same two-vernier technique.
+
+3. **Degree-minute arithmetic**: When subtracting angles, borrow 1° = 60' when needed. For θ₁ − θ₁' where θ₁ < θ₁', add 360° to θ₁ first. Show each individual α calculation before averaging.
+
+4. **Uncertainty**: Vernier reads to 1'. With 6 measurements, use A-type uncertainty (standard deviation of mean) combined with B-type (instrument resolution). Expected total uncertainty: ~0.5–1'.
+
+5. **Adjustment discussion**: Spectrometer adjustment quality directly affects accuracy. Key adjustments: telescope focused at infinity, collimator producing parallel light, prism table leveled, cross-hair elimination of parallax.
+
+### 太阳电池 (Solar Cell I-V Characteristics)
+
+This experiment measures I-V curves under different configurations:
+
+1. **Key parameters**: Short-circuit current Isc (I at V=0), open-circuit voltage Uoc (V at I=0), maximum power Pm = max(I×V), fill factor FF = Pm/(Isc×Uoc), efficiency η = Pm/(Pin×A) where Pin is incident power density and A is total cell area.
+
+2. **P-V curve**: Calculate P = I×V for each data point and plot P vs V alongside I-V. The peak of P-V gives Pm and the optimal operating point.
+
+3. **Configuration comparison**: Compare series vs parallel (series: higher Uoc, same Isc; parallel: higher Isc, same Uoc per cell). Compare different distances (inverse square law: Pin ∝ 1/d²). Compare different angles (Isc ∝ cosθ for small angles).
+
+4. **Fill factor interpretation**: FF reflects internal losses. Ideal diode FF ≈ 0.85–0.90. Lower FF indicates series resistance, shunt resistance, or recombination losses. Typical experimental FF: 0.65–0.86.
+
+5. **Efficiency**: η depends strongly on Pin. At 60cm with ~131 mW/cm², expect η ≈ 3–5%. At 80cm with ~72 mW/cm², η can be slightly higher due to reduced thermal effects. Total cell area = number of cells × single cell area.
+
 ---
 
 ## Scoring Tips (What Gets 90+ Points)

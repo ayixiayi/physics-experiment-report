@@ -66,6 +66,54 @@
         {"id": "a4-chinese-structure", "text": "Report is in Chinese with standard physics lab sections: at minimum 实验目的, 实验原理, 数据处理. Input data (fall times, diameter readings) appears in formatted tables"},
         {"id": "a4-plots-exist", "text": "Python plotting code is provided that generates at least 1 figure (e.g., fall time distribution histogram, or data visualization). Code includes savefig or equivalent to produce PNG output"}
       ]
+    },
+    {
+      "id": 5,
+      "prompt": "帮我写集成霍尔传感器特性测量与应用的实验报告。实验使用SS495A霍尔传感器（灵敏度K标称值31.25±1.25 V/T），螺线管参数：N=3000匝，L=260mm，D=35mm。\n\n实验一：霍尔传感器灵敏度K的测量。固定Is=5V，改变Im测量霍尔电压。Im/mA与U/mV数据：Im=[0, 50, 100, 150, 200, 250, 300, 350, 400, 450], U=[0, 22.15, 44.20, 66.30, 88.44, 110.30, 132.25, 154.24, 176.47, 198.50]。理论磁场B由 B=μ₀NI_m/L 计算。\n\n实验二：螺线管轴线磁场分布B(x)测量。Im=0.20A固定，沿轴线移动霍尔传感器测量不同位置的磁场。x/cm与U/mV数据：x=[-14,-13,-12,-11,-10,-9,-8,-7,-6,-5,-4,-3,-2,-1,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14], U_0=[2.514,2.514,2.514,2.514,2.514,2.514,2.514,2.514,2.514,2.514,2.514,2.514,2.514,2.514,2.514,2.514,2.514,2.514,2.514,2.514,2.514,2.514,2.514,2.514,2.514,2.514,2.514,2.514,2.514], U=[2.534,2.538,2.545,2.558,2.575,2.598,2.622,2.642,2.654,2.659,2.660,2.660,2.660,2.660,2.660,2.659,2.658,2.654,2.644,2.625,2.600,2.577,2.560,2.545,2.536,2.528,2.522,2.518,2.516]。B通过K值换算。\n\n需要完整数据处理：U-B线性拟合求K值、K与标称值比较（相对误差）、B(x)分布曲线绘制与理论曲线对比、Python画图代码、误差分析。",
+      "expected_output": "Complete report with: U vs B linear fit to extract K, K value ~30-33 V/T compared with nominal 31.25 V/T, B(x) distribution curve from Hall voltage data, theoretical B(x) curve overlay, relative error Er, Python plots, Chinese report format.",
+      "files": [],
+      "assertions": [
+        {"id": "a5-k-linear-fit", "text": "U vs B (or U vs Im) data is fit with a linear model. The fit equation and R² (or correlation coefficient) are reported. The slope gives K (sensitivity) in V/T after unit conversion"},
+        {"id": "a5-k-value-accuracy", "text": "Extracted K value is between 28 and 35 V/T. The expected value from this data is approximately 30.7 V/T. The nominal spec is 31.25±1.25 V/T"},
+        {"id": "a5-b-field-formula", "text": "Theoretical magnetic field is calculated using B = μ₀NI_m/L (solenoid formula) with μ₀ = 4π×10⁻⁷ T·m/A. The formula and substitution are shown explicitly"},
+        {"id": "a5-bx-distribution-plot", "text": "A plot of B(x) or ΔU(x) vs position x along the solenoid axis exists, showing the characteristic plateau in the center and falloff at the ends. At least 20 data points are plotted"},
+        {"id": "a5-er-in-report", "text": "Relative error Er = |K_exp - K_nominal| / K_nominal × 100% appears in the report text with a specific numeric percentage value, comparing the measured K with the nominal 31.25 V/T"},
+        {"id": "a5-bx-theory-comparison", "text": "The experimental B(x) distribution is compared with a theoretical prediction. Either an overlay plot with both curves, or a numerical comparison at specific positions (center vs ends), or the theoretical Biot-Savart integral formula for finite solenoid is discussed"},
+        {"id": "a5-chinese-structure", "text": "Report is in Chinese with standard sections including 实验目的, 实验原理, 数据处理. Input data appears in formatted tables"},
+        {"id": "a5-plots-exist", "text": "Python plotting code generates at least 2 figures: one for the U-B linear fit and one for the B(x) distribution. Code includes savefig or equivalent to produce PNG output"}
+      ]
+    },
+    {
+      "id": 6,
+      "prompt": "帮我写光学测角仪调整与使用的实验报告。实验用分光计测量三棱镜顶角α，使用反射法和自准法两种方法。\n\n反射法数据（6次测量）：\n望远镜甲：θ₁ = [20°2', 20°1', 20°2', 20°1', 20°1', 20°2']\n望远镜甲对面：θ₁' = [200°1', 200°0', 200°1', 200°1', 200°0', 200°1']\n望远镜乙：θ₂ = [260°3', 260°2', 260°3', 260°2', 260°2', 260°3']\n望远镜乙对面：θ₂' = [80°2', 80°1', 80°2', 80°1', 80°2', 80°3']\n反射法公式：α = ½[(θ₁ - θ₁') + (θ₂ - θ₂')] = ½[(θ₁ + 360° - θ₁') + (θ₂ - θ₂')]\n\n自准法数据（6次测量）：\n望远镜甲：θ₁ = [18°45', 18°44', 18°47', 18°46', 18°45', 18°46']\n望远镜甲对面：θ₁' = [198°45', 198°44', 198°48', 198°46', 198°45', 198°47']\n望远镜乙：θ₂ = [258°46', 258°45', 258°46', 258°45', 258°46', 258°45']\n望远镜乙对面：θ₂' = [78°45', 78°44', 78°45', 78°44', 78°45', 78°44']\n自准法公式：α = 180° - ½[(θ₁ - θ₁') + (θ₂ - θ₂')]\n\n需要完整数据处理（每次测量计算α、取平均、计算不确定度）、两种方法的结果对比、Python数据处理代码、误差分析（讨论分光计调整对测量精度的影响）。",
+      "expected_output": "Complete report with: degree-minute arithmetic for each measurement, mean α from both methods ≈ 60°0' ± 0.5-1', uncertainty calculation in arcminutes, method comparison, Python code for data processing, Chinese report format.",
+      "files": [],
+      "assertions": [
+        {"id": "a6-reflection-method-calc", "text": "Reflection method (反射法) angle α is calculated from the formula α = ½[(θ₁ - θ₁') + (θ₂ - θ₂')]. At least 3 individual α values are shown with degree-minute arithmetic before averaging"},
+        {"id": "a6-autocollimation-method-calc", "text": "Autocollimation method (自准法) angle α is calculated from α = 180° - ½[(θ₁ - θ₁') + (θ₂ - θ₂')]. At least 3 individual α values are shown before averaging"},
+        {"id": "a6-alpha-value-accuracy", "text": "The final mean α from both methods is between 59°58' and 60°2'. The expected value is very close to 60°0'. Values outside this range indicate arithmetic errors in degree-minute conversion"},
+        {"id": "a6-uncertainty-arcminute", "text": "Measurement uncertainty is calculated and reported in arcminutes (or degrees with decimal). The uncertainty should be less than 2' for this data quality. Standard deviation or instrument uncertainty (1' vernier) is used"},
+        {"id": "a6-method-comparison", "text": "The two methods (反射法 and 自准法) are explicitly compared: their mean α values, uncertainties, and any systematic differences are discussed"},
+        {"id": "a6-er-in-report", "text": "Relative error Er or relative uncertainty Ur appears in the report text with a specific numeric percentage. This can be Er vs the nominal 60° value, or the combined relative uncertainty of the measurement"},
+        {"id": "a6-spectrometer-adjustment", "text": "Discussion includes how spectrometer adjustment quality affects measurement accuracy — at least one of: telescope focus, collimator adjustment, leveling of the prism table, or elimination of parallax"},
+        {"id": "a6-chinese-structure", "text": "Report is in Chinese with standard sections including 实验目的, 实验原理, 数据处理. Angular data appears in formatted tables with degree-minute notation"}
+      ]
+    },
+    {
+      "id": 7,
+      "prompt": "帮我写太阳电池伏安特性测量的实验报告。实验测量了太阳电池在不同配置下的I-V特性曲线，计算短路电流Isc、开路电压Uoc、最大功率Pm、填充因子FF和光电转换效率η。\n\n电池参数：4片电池，每片约5.55cm × 5.95cm。光源为碘钨灯。\n\n配置1：80cm距离，四串联，入射角0°\nU/V = [0, 2.0, 4.0, 6.0, 7.0, 8.0, 9.0, 9.5, 10.0, 10.5, 11.0, 11.5, 12.0, 12.5, 13.0, 13.5]\nI/mA = [27.2, 27.2, 27.0, 26.8, 26.4, 26.1, 25.3, 24.2, 23.2, 21.8, 19.5, 16.6, 12.5, 7.5, 2.3, 0]\n\n配置2：60cm距离，四并联，入射角0°\nU/V = [0, 0.2, 0.5, 0.8, 1.0, 1.2, 1.5, 1.8, 2.0, 2.2, 2.4, 2.6, 2.8, 3.0, 3.2, 3.36]\nI/mA = [181.8, 181.6, 181.0, 180.0, 179.2, 177.6, 174.5, 170.0, 165.0, 157.0, 143.0, 120.0, 88.0, 50.0, 13.2, 0]\n\n配置3：60cm距离，四串联，入射角30°\nU/V = [0, 2.0, 4.0, 6.0, 7.0, 8.0, 9.0, 9.5, 10.0, 10.5, 11.0, 11.5, 12.0, 12.5, 13.0, 13.46]\nI/mA = [38.7, 38.5, 38.3, 37.8, 37.4, 36.9, 35.8, 34.8, 33.5, 31.3, 28.0, 23.4, 17.2, 9.8, 2.3, 0]\n\n需要完整数据处理：I-V特性曲线和P-V特性曲线绘制、Isc/Uoc/Pm/FF/η计算（η需知道入射光功率密度，80cm处约72mW/cm²，60cm处约131mW/cm²）、不同配置间的对比分析、填充因子FF = Pm/(Isc×Uoc)、Python画图代码、误差分析。",
+      "expected_output": "Complete report with: I-V and P-V curves for each configuration, Isc/Uoc/Pm/FF/η values tabulated, FF ≈ 0.68-0.86 range, η ≈ 3-6% range, configuration comparison (series vs parallel, distance effect, angle effect), Python plots, Chinese report format.",
+      "files": [],
+      "assertions": [
+        {"id": "a7-iv-curves", "text": "I-V characteristic curves are plotted for at least 2 configurations. Each curve shows voltage on x-axis, current on y-axis, with clear labels and the characteristic solar cell shape (flat then steep drop)"},
+        {"id": "a7-pv-curves", "text": "P-V (power vs voltage) curves are plotted, either as separate figures or overlaid with I-V curves. The maximum power point Pm is identifiable on each curve"},
+        {"id": "a7-ff-calculation", "text": "Fill factor FF = Pm/(Isc × Uoc) is calculated for at least 2 configurations. FF values should be between 0.60 and 0.90. The formula is shown explicitly with numeric substitution"},
+        {"id": "a7-efficiency-calculation", "text": "Photoelectric conversion efficiency η = Pm/(Pin × A) is calculated, where A is the total cell area and Pin is the incident power density. η values should be between 1% and 8% for these configurations"},
+        {"id": "a7-config-comparison", "text": "A comparison of different configurations is presented — at least 2 of: series vs parallel topology, distance effect (80cm vs 60cm), or angle effect (0° vs 30°). The comparison includes numeric values, not just qualitative statements"},
+        {"id": "a7-er-in-report", "text": "Relative error Er or quantitative performance metric appears in the report text. This can be: FF deviation from ideal, η comparison between configurations, or Isc ratio vs theoretical cos(θ) for angle dependence"},
+        {"id": "a7-summary-table", "text": "A summary table lists Isc, Uoc, Pm, FF, and η for all measured configurations side by side for easy comparison"},
+        {"id": "a7-chinese-structure", "text": "Report is in Chinese with standard sections including 实验目的, 实验原理, 数据处理. I-V data appears in formatted tables with proper units (V, mA, mW)"}
+      ]
     }
   ]
 }

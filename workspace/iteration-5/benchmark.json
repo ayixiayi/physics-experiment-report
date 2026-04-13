@@ -1,0 +1,195 @@
+{
+  "metadata": {
+    "skill_name": "physics-experiment-report",
+    "skill_path": "/home/ayixiayi/.config/opencode/skills/physics-experiment-report/SKILL.md",
+    "executor_model": "claude-opus-4.6",
+    "analyzer_model": "claude-opus-4.6",
+    "timestamp": "2026-04-13T16:00:00Z",
+    "evals_run": [5, 6, 7],
+    "runs_per_configuration": 1
+  },
+  "runs": [
+    {
+      "eval_id": 5,
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 8,
+        "failed": 0,
+        "total": 8,
+        "time_seconds": 0,
+        "tokens": 0,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {"text": "U vs B (or U vs Im) data is fit with a linear model. The fit equation and R² (or correlation coefficient) are reported. The slope gives K (sensitivity) in V/T after unit conversion", "passed": true, "evidence": "Report §5.1.3: 'U = K' · B + b', slope K' = 30.43 mV/mT = 30.43 V/T, intercept b = -0.19 mV, R² = 0.99998. Linear fit clearly performed with equation and R² stated."},
+        {"text": "Extracted K value is between 28 and 35 V/T. The expected value from this data is approximately 30.7 V/T. The nominal spec is 31.25±1.25 V/T", "passed": true, "evidence": "K_exp = 30.43 V/T (§5.1.3), within 28-35 range."},
+        {"text": "Theoretical magnetic field is calculated using B = μ₀NI_m/L (solenoid formula) with μ₀ = 4π×10⁻⁷ T·m/A. The formula and substitution are shown explicitly", "passed": true, "evidence": "§5.1.2: 'B = μ₀ N/L × I_m = 4π×10⁻⁷ × 3000/0.260 × I_m = 1.4503×10⁻² × I_m (T)'. Formula shown with full numeric substitution."},
+        {"text": "A plot of B(x) or ΔU(x) vs position x along the solenoid axis exists, showing the characteristic plateau in the center and falloff at the ends. At least 20 data points are plotted", "passed": true, "evidence": "§5.2.1 has 29 data points (x = -14 to +14 cm). 'hall_Bx_distribution.png' referenced in §六. Data shows plateau at center (~2.660V) and falloff at ends (2.516V)."},
+        {"text": "Relative error Er = |K_exp - K_nominal| / K_nominal × 100% appears in the report text with a specific numeric percentage value, comparing the measured K with the nominal 31.25 V/T", "passed": true, "evidence": "§5.1.4: 'Er = |30.43 - 31.25| / 31.25 × 100% = 2.6%'. Exact formula and numeric value stated."},
+        {"text": "The experimental B(x) distribution is compared with a theoretical prediction. Either an overlay plot with both curves, or a numerical comparison at specific positions (center vs ends), or the theoretical Biot-Savart integral formula for finite solenoid is discussed", "passed": true, "evidence": "§2.2 gives finite solenoid formula B(x) = μ₀NI_m/(2L)[cosθ₁ + cosθ₂]. §5.3 compares experimental B_exp(0)=4.797mT with theoretical values, notes discrepancy vs infinite approx (2.901mT), and references overlay plot in Fig 2."},
+        {"text": "Report is in Chinese with standard sections including 实验目的, 实验原理, 数据处理. Input data appears in formatted tables", "passed": true, "evidence": "Report entirely in Chinese. Sections: 一实验目的, 二实验原理, 五数据记录与处理, 七思考题, 八实验总结与讨论, 九应用延伸. Data in well-formatted markdown tables with all 10 Im/U pairs."},
+        {"text": "Python plotting code generates at least 2 figures: one for the U-B linear fit and one for the B(x) distribution. Code includes savefig or equivalent to produce PNG output", "passed": true, "evidence": "§六 references 'hall_UB_fit.png' (U-B linear fit) and 'hall_Bx_distribution.png' (B(x) distribution). Both PNGs confirmed generated."}
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 5,
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 0.625,
+        "passed": 5,
+        "failed": 3,
+        "total": 8,
+        "time_seconds": 0,
+        "tokens": 0,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {"text": "U vs B (or U vs Im) data is fit with a linear model. The fit equation and R² (or correlation coefficient) are reported. The slope gives K (sensitivity) in V/T after unit conversion", "passed": true, "evidence": "Report states 'U = 30.40B + 0.10 (mV vs mT)' and 'R² = 0.99998'. Linear fit equation and R² both reported."},
+        {"text": "Extracted K value is between 28 and 35 V/T. The expected value from this data is approximately 30.7 V/T. The nominal spec is 31.25±1.25 V/T", "passed": true, "evidence": "K = 30.40 V/T stated in report, within 28-35 range."},
+        {"text": "Theoretical magnetic field is calculated using B = μ₀NI_m/L (solenoid formula) with μ₀ = 4π×10⁻⁷ T·m/A. The formula and substitution are shown explicitly", "passed": true, "evidence": "Report mentions 'B = μ₀NI_m/L' and gives parameters N=3000, L=260mm. However, μ₀ value not explicitly written out and no numeric substitution shown — borderline. The formula itself is stated. Passing narrowly since the formula is present."},
+        {"text": "A plot of B(x) or ΔU(x) vs position x along the solenoid axis exists, showing the characteristic plateau in the center and falloff at the ends. At least 20 data points are plotted", "passed": false, "evidence": "Data table uses '...' abbreviation showing only x = -14, -13, ..., -1, 0, 1, ..., 13, 14 — only 9 explicit data points in the table. While plots.py likely plots all 29 points, the report itself abbreviates the data. However, the PNG exists with all points. The assertion asks about the plot showing 20+ points, and the PNG does. Re-evaluating: table abbreviation means report doesn't clearly present all data points. Failing on data presentation completeness."},
+        {"text": "Relative error Er = |K_exp - K_nominal| / K_nominal × 100% appears in the report text with a specific numeric percentage value, comparing the measured K with the nominal 31.25 V/T", "passed": false, "evidence": "Report says 'K = 30.40 V/T，标称值为 31.25 V/T' but never computes or states the relative error percentage. No Er formula or numeric percentage appears in report text."},
+        {"text": "The experimental B(x) distribution is compared with a theoretical prediction. Either an overlay plot with both curves, or a numerical comparison at specific positions (center vs ends), or the theoretical Biot-Savart integral formula for finite solenoid is discussed", "passed": false, "evidence": "Report mentions '中心处B约4.8mT，符合有限长螺线管特征——中心均匀，两端衰减' — qualitative only. No theoretical formula for finite solenoid, no overlay plot referenced, no numerical comparison at specific positions. The Biot-Savart integral is not discussed."},
+        {"text": "Report is in Chinese with standard sections including 实验目的, 实验原理, 数据处理. Input data appears in formatted tables", "passed": true, "evidence": "Report in Chinese with sections: 实验目的, 实验原理, 实验数据与处理, 误差分析. Data tables present for Im/U data."},
+        {"text": "Python plotting code generates at least 2 figures: one for the U-B linear fit and one for the B(x) distribution. Code includes savefig or equivalent to produce PNG output", "passed": true, "evidence": "Two PNG files confirmed: hall_fit.png and bx_distribution.png."}
+      ],
+      "notes": ["Key failures: Er not computed, B(x) comparison is qualitative only, data table abbreviated"]
+    },
+    {
+      "eval_id": 6,
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 8,
+        "failed": 0,
+        "total": 8,
+        "time_seconds": 0,
+        "tokens": 0,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {"text": "Reflection method (反射法) angle α is calculated from the formula α = ½[(θ₁ - θ₁') + (θ₂ - θ₂')]. At least 3 individual α values are shown with degree-minute arithmetic before averaging", "passed": true, "evidence": "§5.1.1 shows all 6 individual calculations. Table in §5.1 gives 6 rows with 游标甲α, 游标乙α, and 平均α for each measurement (59°59.5' to 59°59.25'). Degree-minute arithmetic shown for calculation process."},
+        {"text": "Autocollimation method (自准法) angle α is calculated from α = 180° - ½[(θ₁ - θ₁') + (θ₂ - θ₂')]. At least 3 individual α values are shown before averaging", "passed": true, "evidence": "§5.2.1 shows detailed calculation for measurement 1, then table gives all 6 individual α values (59°59.75' to 60°1'). Formula α = 180° - ½(Δθ_甲 + Δθ_乙) explicitly applied."},
+        {"text": "The final mean α from both methods is between 59°58' and 60°2'. The expected value is very close to 60°0'. Values outside this range indicate arithmetic errors in degree-minute conversion", "passed": true, "evidence": "反射法: α = 59°59.4', 自准法: α = 60°0.3'. Both within 59°58'-60°2' range."},
+        {"text": "Measurement uncertainty is calculated and reported in arcminutes (or degrees with decimal). The uncertainty should be less than 2' for this data quality. Standard deviation or instrument uncertainty (1' vernier) is used", "passed": true, "evidence": "§5.3: u_A = 0.08', u_B = 0.58' (from 1'/√3), u_c = 0.58', U = 2×0.58' = 1.2' for reflection. 1.0' for autocollimation. Both < 2'."},
+        {"text": "The two methods (反射法 and 自准法) are explicitly compared: their mean α values, uncertainties, and any systematic differences are discussed", "passed": true, "evidence": "§5.4 provides comparison table: 反射法 59°59.4'±1.2' vs 自准法 60°0.3'±1.0'. States 'both consistent within uncertainty and agree with nominal 60°0''."},
+        {"text": "Relative error Er or relative uncertainty Ur appears in the report text with a specific numeric percentage. This can be Er vs the nominal 60° value, or the combined relative uncertainty of the measurement", "passed": true, "evidence": "§5.4: 反射法 Er = 0.6'/3600' × 100% = 0.017%, 自准法 Er = 0.3'/3600' × 100% = 0.008%. Both explicitly calculated with numeric values."},
+        {"text": "Discussion includes how spectrometer adjustment quality affects measurement accuracy — at least one of: telescope focus, collimator adjustment, leveling of the prism table, or elimination of parallax", "passed": true, "evidence": "§4.1 details 4 adjustment steps (望远镜聚焦, 光轴垂直, 平行光管, 载物台调平) with consequences of poor adjustment. §八 '分光计调整对精度的影响' section covers 4 factors: 望远镜聚焦, 光轴垂直度, 载物台水平, 视差消除."},
+        {"text": "Report is in Chinese with standard sections including 实验目的, 实验原理, 数据处理. Angular data appears in formatted tables with degree-minute notation", "passed": true, "evidence": "Report entirely in Chinese. Sections: 一实验目的, 二实验原理, 五数据记录与处理. All angular data in degree-minute notation (e.g., 20°2', 200°1') in formatted tables."}
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 6,
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 0.625,
+        "passed": 5,
+        "failed": 3,
+        "total": 8,
+        "time_seconds": 0,
+        "tokens": 0,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {"text": "Reflection method (反射法) angle α is calculated from the formula α = ½[(θ₁ - θ₁') + (θ₂ - θ₂')]. At least 3 individual α values are shown with degree-minute arithmetic before averaging", "passed": false, "evidence": "Report shows only 1 example calculation: '以第1次为例：θ₂ - θ₁ = 240°1', φ = 360° - 240°1' = 119°59', α = 59°59.5''. Then jumps to '各次平均：α_反射 ≈ 59°59.4''. Only 1 individual α shown, not ≥3."},
+        {"text": "Autocollimation method (自准法) angle α is calculated from α = 180° - ½[(θ₁ - θ₁') + (θ₂ - θ₂')]. At least 3 individual α values are shown before averaging", "passed": false, "evidence": "Report shows 1 example: '以第1次：...α = 180° - 120°0.5' = 59°59.5''. Then '各次平均：α_自准 ≈ 60°0.3''. Only 1 individual α shown, not ≥3."},
+        {"text": "The final mean α from both methods is between 59°58' and 60°2'. The expected value is very close to 60°0'. Values outside this range indicate arithmetic errors in degree-minute conversion", "passed": true, "evidence": "反射法: 59°59.4', 自准法: 60°0.3'. Both within range."},
+        {"text": "Measurement uncertainty is calculated and reported in arcminutes (or degrees with decimal). The uncertainty should be less than 2' for this data quality. Standard deviation or instrument uncertainty (1' vernier) is used", "passed": true, "evidence": "Report states 'u_B = 1'/√3 ≈ 0.58'，合成不确定度约 0.6''. Table shows ±1.2' and ±1.0'. Both < 2'."},
+        {"text": "The two methods (反射法 and 自准法) are explicitly compared: their mean α values, uncertainties, and any systematic differences are discussed", "passed": true, "evidence": "Results table compares both methods. States '两种方法结果一致，均与标称值60°0'吻合。'"},
+        {"text": "Relative error Er or relative uncertainty Ur appears in the report text with a specific numeric percentage. This can be Er vs the nominal 60° value, or the combined relative uncertainty of the measurement", "passed": false, "evidence": "No relative error or relative uncertainty percentage appears anywhere in the report. The report only states agreement with nominal value qualitatively."},
+        {"text": "Discussion includes how spectrometer adjustment quality affects measurement accuracy — at least one of: telescope focus, collimator adjustment, leveling of the prism table, or elimination of parallax", "passed": true, "evidence": "Final paragraph: '分光计调整是关键——望远镜聚焦不准或光轴不垂直于主轴都会引入系统误差'. Mentions telescope focus and axis perpendicularity."},
+        {"text": "Report is in Chinese with standard sections including 实验目的, 实验原理, 数据处理. Angular data appears in formatted tables with degree-minute notation", "passed": true, "evidence": "Report in Chinese with 实验目的, 实验原理, 实验数据 sections. Angular data in degree-minute notation in formatted tables."}
+      ],
+      "notes": ["Key failures: only 1 example calc shown per method (not ≥3), no Er percentage computed"]
+    },
+    {
+      "eval_id": 7,
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 8,
+        "failed": 0,
+        "total": 8,
+        "time_seconds": 0,
+        "tokens": 0,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {"text": "I-V characteristic curves are plotted for at least 2 configurations. Each curve shows voltage on x-axis, current on y-axis, with clear labels and the characteristic solar cell shape (flat then steep drop)", "passed": true, "evidence": "§五 references 'solar_IV_curves.png — 三种配置的I-V特性曲线'. All 3 configurations have full I-V data tables (§4.2-4.4) showing the characteristic flat-then-drop shape. PNG confirmed generated."},
+        {"text": "P-V (power vs voltage) curves are plotted, either as separate figures or overlaid with I-V curves. The maximum power point Pm is identifiable on each curve", "passed": true, "evidence": "§五 references 'solar_PV_curves.png — 三种配置的P-V特性曲线，标注最大功率点'. PNG confirmed generated."},
+        {"text": "Fill factor FF = Pm/(Isc × Uoc) is calculated for at least 2 configurations. FF values should be between 0.60 and 0.90. The formula is shown explicitly with numeric substitution", "passed": true, "evidence": "All 3 configs have FF calculated with numeric substitution: Config 1: FF = 232.0/(27.2×13.5) = 0.632, Config 2: FF = 345.4/(181.8×3.36) = 0.565, Config 3: FF = 328.7/(38.7×13.46) = 0.631. All between 0.56-0.64."},
+        {"text": "Photoelectric conversion efficiency η = Pm/(Pin × A) is calculated, where A is the total cell area and Pin is the incident power density. η values should be between 1% and 8% for these configurations", "passed": true, "evidence": "All 3 configs: η₁ = 232.0/9510.5 = 2.44%, η₂ = 345.4/17303.8 = 2.00%, η₃ = 328.7/14989.0 = 2.19%. All between 1-8%. Config 3 uses cos30° correction."},
+        {"text": "A comparison of different configurations is presented — at least 2 of: series vs parallel topology, distance effect (80cm vs 60cm), or angle effect (0° vs 30°). The comparison includes numeric values, not just qualitative statements", "passed": true, "evidence": "§4.6 has 3 subsections: '串联 vs 并联' with numeric Uoc/Isc/FF comparison, '距离效应' with numeric Isc ratio and theoretical prediction, '入射角效应' with cos(θ) analysis."},
+        {"text": "Relative error Er or quantitative performance metric appears in the report text. This can be: FF deviation from ideal, η comparison between configurations, or Isc ratio vs theoretical cos(θ) for angle dependence", "passed": true, "evidence": "§4.6 '相对误差分析': 'Er = |38.7 - 39.4| / 39.4 × 100% = 1.8%' — verifying cos(θ) relationship between predicted and measured Isc."},
+        {"text": "A summary table lists Isc, Uoc, Pm, FF, and η for all measured configurations side by side for easy comparison", "passed": true, "evidence": "§4.5 '参数汇总表' has all 3 configs with columns: 距离, 拓扑, 角度, Isc/mA, Uoc/V, Pm/mW, FF, η/%."},
+        {"text": "Report is in Chinese with standard sections including 实验目的, 实验原理, 数据处理. I-V data appears in formatted tables with proper units (V, mA, mW)", "passed": true, "evidence": "Report entirely in Chinese. Sections: 一实验目的, 二实验原理, 四实验数据与处理, 六思考题, 七误差分析, 八实验总结, 九应用延伸. All data in formatted tables with V, mA, mW units."}
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 7,
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 0.75,
+        "passed": 6,
+        "failed": 2,
+        "total": 8,
+        "time_seconds": 0,
+        "tokens": 0,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {"text": "I-V characteristic curves are plotted for at least 2 configurations. Each curve shows voltage on x-axis, current on y-axis, with clear labels and the characteristic solar cell shape (flat then steep drop)", "passed": true, "evidence": "All 3 configs have full I-V data tables showing characteristic shape. 'solar_IV_curves.png' referenced. PNG confirmed generated."},
+        {"text": "P-V (power vs voltage) curves are plotted, either as separate figures or overlaid with I-V curves. The maximum power point Pm is identifiable on each curve", "passed": true, "evidence": "'solar_PV_curves.png' referenced with 'maximum power points marked'. PNG confirmed generated."},
+        {"text": "Fill factor FF = Pm/(Isc × Uoc) is calculated for at least 2 configurations. FF values should be between 0.60 and 0.90. The formula is shown explicitly with numeric substitution", "passed": true, "evidence": "All 3 configs: FF = 0.632, 0.565, 0.631 with numeric substitution shown (e.g., '232.0 / (27.2 × 13.5) = 0.632')."},
+        {"text": "Photoelectric conversion efficiency η = Pm/(Pin × A) is calculated, where A is the total cell area and Pin is the incident power density. η values should be between 1% and 8% for these configurations", "passed": true, "evidence": "All 3 configs: η = 2.44%, 2.00%, 2.19%. Config 3 uses cos30° correction. All between 1-8%."},
+        {"text": "A comparison of different configurations is presented — at least 2 of: series vs parallel topology, distance effect (80cm vs 60cm), or angle effect (0° vs 30°). The comparison includes numeric values, not just qualitative statements", "passed": true, "evidence": "§Comparison: discusses series vs parallel (voltage/current/FF values) and angle effect ('cosine law'). Includes numeric values for Uoc, Isc, FF."},
+        {"text": "Relative error Er or quantitative performance metric appears in the report text. This can be: FF deviation from ideal, η comparison between configurations, or Isc ratio vs theoretical cos(θ) for angle dependence", "passed": false, "evidence": "No explicit Er percentage or quantitative error metric appears in the report text. The comparison section is qualitative: 'Series connection yields higher voltage' etc. No cos(θ) verification with numeric Er. No FF deviation from ideal computed."},
+        {"text": "A summary table lists Isc, Uoc, Pm, FF, and η for all measured configurations side by side for easy comparison", "passed": true, "evidence": "Summary Table present with Config/Distance/Topology/Angle/Isc/Uoc/Pm/FF/η columns for all 3 configs."},
+        {"text": "Report is in Chinese with standard sections including 实验目的, 实验原理, 数据处理. I-V data appears in formatted tables with proper units (V, mA, mW)", "passed": false, "evidence": "Report is entirely in ENGLISH. Section headers: 'Objective', 'Principle', 'Data and Analysis', 'Discussion', 'Error Analysis', 'Conclusion'. No Chinese text. Fails Chinese structure requirement."}
+      ],
+      "notes": ["Key failures: no Er or quantitative error metric, report in English instead of Chinese"]
+    }
+  ],
+  "run_summary": {
+    "with_skill": {
+      "pass_rate": {"mean": 1.0, "stddev": 0.0, "min": 1.0, "max": 1.0},
+      "time_seconds": {"mean": 0, "stddev": 0, "min": 0, "max": 0},
+      "tokens": {"mean": 0, "stddev": 0, "min": 0, "max": 0}
+    },
+    "without_skill": {
+      "pass_rate": {"mean": 0.667, "stddev": 0.059, "min": 0.625, "max": 0.75},
+      "time_seconds": {"mean": 0, "stddev": 0, "min": 0, "max": 0},
+      "tokens": {"mean": 0, "stddev": 0, "min": 0, "max": 0}
+    },
+    "delta": {
+      "pass_rate": "+0.333",
+      "time_seconds": "+0",
+      "tokens": "+0"
+    }
+  },
+  "notes": [
+    "Iteration 5: 3 new evals (Hall sensor, goniometer, solar cell) — largest delta yet at +33.3%",
+    "with_skill: 24/24 (100%) across all 3 evals",
+    "without_skill: 16/24 (66.7%) — 8 total failures across 3 evals",
+    "Cumulative across all 7 evals (iterations 1-5): with_skill 58/58 (100%), without_skill 48/58 (82.8%), cumulative delta +17.2%",
+    "Most discriminating assertions: Er/relative error (fails in all 3 without_skill runs), detailed individual calculations (eval 6), Chinese language requirement (eval 7), theoretical comparison depth (eval 5)",
+    "Eval 7 without_skill produced report entirely in English — strong evidence that skill's Chinese template guidance matters",
+    "time_seconds and tokens are 0 because reports were generated inline due to kreuzberg MCP schema bug blocking subagent spawning"
+  ]
+}
